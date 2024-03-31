@@ -2,10 +2,10 @@
 import HomeComponent from "@/components/HomeComponent";
 import Image from "next/image";
 
-export default function Home() {
+export default function Docs() {
   return (
     <main className="w-1/4 flex-1 h-screen overflow-scroll">
-      <HomeComponent />
+      <p>Docs</p>
     </main>
   );
 }

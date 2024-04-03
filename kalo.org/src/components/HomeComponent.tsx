@@ -45,6 +45,12 @@ const HomeComponent: React.FC = () => {
 
   const groupedEvents = groupEventsByCategory(events, 10);
 
+  
+//find all bet that has 0 hours from database and update the winner. basically calling the update bet function
+  // useEffect(() => {
+
+  // }, [])
+
   return (
     <div className="bg-gray-800 p-4 rounded-md w-full">
       <div className="relative cursor-pointer min-h-[235px] rounded-[6px] flex flex-col justify-end mb-5">
@@ -65,6 +71,7 @@ const HomeComponent: React.FC = () => {
         <SkeletonLoader />
       ) : (
         <>
+        {/* show all user bet  and thhe time remaining for the bet*/}
           {Object.entries(groupedEvents).map(([categoryTitle, events], index) => (
             <div key={categoryTitle} className={`mb-8 ${index !== 0 ? 'mt-8' : ''}`}>
               <h2 className="text-white text-lg mb-2">{categoryTitle}</h2>

@@ -28,7 +28,7 @@ export default function Sidebar() {
             <MdOutlineSportsFootball />
 
             </span> 
-          <Link href="/CreateBet">Create Bets</Link>
+          <Link href="/createBets">Create Bets</Link>
         </li>
         <li className='flex gap-2 items-center'>
             <span className="text-lg">

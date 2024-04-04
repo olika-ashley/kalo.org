@@ -6,7 +6,7 @@ const LiveBetComponent = () => {
     return (
         <div className='py-10 h-[90%] overflow-scroll'>
             <div className='px-6'>
-            <h2>Recent bets</h2>
+            <h2 className='flex py-3 pt-5 text-3xl w-2/5'>Recent Bets</h2>
             <div className='py-4 mx-auto max-w-[800px]'>
                 <div className='flex my-4 items-center p-4 rounded-md bg-[#ffffff]'>
                     <div className='flex flex-col items-center'>

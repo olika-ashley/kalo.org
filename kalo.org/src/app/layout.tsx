@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import AppContextProvider from "@/context/AppContextProvider";
-import Sidebar from "@/components/Sidebar";
+import AuthContextProvider from "@/context/AuthContextProvider";
+import { AppContextProvider } from "@/context/AppContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AppContextProvider>
-        <div className="h-screen flex w-full bg-gray-800">
-          <Sidebar />
-          {children}
-        </div>
-        </AppContextProvider>
+        <AuthContextProvider>
+          <AppContextProvider>
+            {children}
+          </AppContextProvider>
+        </AuthContextProvider>
         </body>
     </html>
   );

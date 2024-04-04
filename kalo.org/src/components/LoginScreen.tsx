@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import {
   DynamicEmbeddedWidget, useDynamicContext,
 } from "@dynamic-labs/sdk-react-core"
-import { useContextState } from '@/context/contextProvider'
+import { useContextState } from '@/context/AppContextProvider'
 
 const LoginScreen = () => {
   const {setShowLoginScreen}= useContextState()

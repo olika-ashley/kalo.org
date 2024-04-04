@@ -18,6 +18,7 @@ model Bets {
   id   String @id @default(uuid())
   createdAt     DateTime @default(now())
   condition     String 
+  name     String 
   currentBetCondition String  
   userId        String
   user          User      @relation(fields: [userId], references: [id])
@@ -44,7 +45,8 @@ model User {
   id   String @id @default(uuid())
   createdAt     DateTime @default(now())
   email         String   @unique
-  name          String
+  firstName          String
+  lastName          String
   updateAt      DateTime? @default(now())
   walletAddress String
   username     String

@@ -11,7 +11,7 @@ import Image from "next/image";
 //ami idk we could add the signin/sign up buttons here (they'd be at the bottom of the nav bar)
 export default function Sidebar() {
     return (
-      <div className="bg-[#1A202C] w-1/4 h-screen">
+      <div className="bg-[#ededed] shadow-2xl w-[250px] fixed top-0 left-0 h-screen">
         <div className='px-16 pt-6 py-8 flex gap-1 items-center'>
             <Image src={kaloLogo} width={50} height={50} loading='lazy' alt="Kalo clear logo" />
             <span>Kalò</span>

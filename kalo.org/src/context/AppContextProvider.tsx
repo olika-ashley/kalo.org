@@ -1,23 +1,37 @@
 "use client"
-import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
-import { SolanaWalletConnectors } from "@dynamic-labs/solana";
+import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+
+
+interface IstateContext {
+    showLoginScreen: boolean
+    setShowLoginScreen: Dispatch<SetStateAction<boolean>>
+    showSidebar: boolean
+    setShowSidebar: Dispatch<SetStateAction<boolean>>
+}
+
+const initialState = {
+    showLoginScreen: false,
+    setShowLoginScreen: () => false,
+    showSidebar: false,
+    setShowSidebar: () => false,
+}
+
+const StateContext = createContext<IstateContext>(initialState)
 
 interface Childern {
     children: React.ReactNode
 }
 
-const AppContextProvider: React.FC<Childern> = ({ children }) => {
-    const environmentId = process.env.NEXT_PUBLIC_DYNAMIC_API_KEY || '';
+export const AppContextProvider: React.FC<Childern> = ({ children }) => {
+    const [showLoginScreen, setShowLoginScreen] = useState<any>()
+    const [showSidebar, setShowSidebar] = useState<boolean>(false)
 
     return (
-        <DynamicContextProvider
-            settings={{
-                environmentId: environmentId,
-                walletConnectors: [SolanaWalletConnectors],
-            }}>
+        <StateContext.Provider value={{
+            setShowLoginScreen, showLoginScreen, showSidebar, setShowSidebar
+        }}>
             {children}
-        </DynamicContextProvider>
+        </StateContext.Provider>
     )
 }
-
-export default AppContextProvider
+export const useContextState = () => useContext(StateContext)

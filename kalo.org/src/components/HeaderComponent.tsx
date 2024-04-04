@@ -15,7 +15,7 @@ export const Navbar = () => {
 
   return (
     <div className='w-full'>
-      <div className='flex  items-center justify-between px-20 bg-white shadow-lg py-4'>
+      <div className='flex invisible md:visible items-center justify-between px-20 bg-white shadow-lg py-4'>
         {/* Logo */}
         <div className='flex-1 w-3/4 flex items-center justify-evenly'>
           <h1 className="text-3xl text-black">Kalo</h1>

@@ -10,7 +10,7 @@ export const Navbar = () => {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
-    return pathname === href || (href === '/' && pathname === '/createBets');
+    return pathname === href || (href === '/' && pathname === '/create-bet');
   };
 
   return (
@@ -21,8 +21,8 @@ export const Navbar = () => {
           <h1 className="text-3xl text-black">Kalo</h1>
           
           {/* Create bet */}
-          <Link href="/createBets">
-            <div className={`flex items-center ${isActive('/createBets') ? 'pb-2 pt-3 border-b border-black' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
+          <Link href="/">
+            <div className={`flex items-center ${isActive('/') ? 'pb-2 pt-3 border-b border-black' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
               {/* Your code for Create bet */}
               <HiOutlinePlusSm className="text-black mr-1 text-2xl" />
               <p className="text-black">Create bet</p>
@@ -39,8 +39,8 @@ export const Navbar = () => {
           </Link>
 
           {/* Live bets */}
-          <Link href="/live_bet">
-            <div className={`flex items-center ${isActive('/live_bet') ? 'pb-2 pt-3 border-b border-[#B2B1B1]' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
+          <Link href="/live-bets">
+            <div className={`flex items-center ${isActive('/live-bets') ? 'pb-2 pt-3 border-b border-[#B2B1B1]' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
               {/* Your code for Live Bet */}
               <PiPlayCircle className="text-black mr-1 text-2xl" />
               <p className="text-black">Live Bet</p>
@@ -51,7 +51,7 @@ export const Navbar = () => {
         
         {/* Connection */}
         
-          <a href="#" className="py-3 px-7 bg-[#7343CB] text-white rounded-xl" >Connect Wallet</a>
+          <a href="#" className="py-3 px-7 bg-[#7343CB] rounded-xl" >Connect Wallet</a>
         
       </div>
     </div>

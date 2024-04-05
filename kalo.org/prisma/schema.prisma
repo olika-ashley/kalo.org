@@ -13,43 +13,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Bets {
-  id   String @id @default(uuid())
-  createdAt     DateTime @default(now())
-  condition     String 
-  name     String 
-  currentBetCondition String  
-  userId        String
-  user          User      @relation(fields: [userId], references: [id])
-  winner        String?
-  loser         String?
-  answer        Boolean
-  betDeadline   DateTime
-  stakeAmount   Float 
-  historys      History[]
+  id                  String    @id @default(uuid())
+  createdAt           DateTime  @default(now())
+  condition           String
+  name                String
+  currentBetCondition String
+  user1Name           String?
+  user2Name           String?
+  userId              String
+  user                User      @relation(fields: [userId], references: [id])
+  winner              String?
+  loser               String?
+  answer              Boolean?
+  user1Answer         Boolean?
+  user2Answer         Boolean?
+  user2Id         String?
+  betDeadline         String
+  stakeAmount         Float
+  historys            History[]
 }
 
 model History {
-  id   String @id @default(uuid())
-  createdAt     DateTime @default(now())
-  condition     String
-  betId         String
-  bets          Bets   @relation(fields: [betId], references: [id])
-  userId        String
-  user          User      @relation(fields: [userId], references: [id])
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  name      String
+  betId     String
+  bets      Bets     @relation(fields: [betId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  winner    String
+  loser     String
+  user2Id   String
 }
 
-
 model User {
-  id   String @id @default(uuid())
-  createdAt     DateTime @default(now())
-  email         String   @unique
-  firstName          String
-  lastName          String
+  id            String    @id @default(uuid())
+  createdAt     DateTime  @default(now())
+  email         String    @unique
+  firstName     String
+  lastName      String
   updateAt      DateTime? @default(now())
   walletAddress String
-  username     String
+  username      String
   bets          Bets[]
   historys      History[]
 }

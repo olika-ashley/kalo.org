@@ -6,14 +6,18 @@ import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import LoginScreen from './LoginScreen';
 import { Slider } from './ui/slider';
+import { useRouter } from 'next/navigation';
 
 
 const AddBetComponent = () => {
   const [selectAnswer, setSelectAnswer] = useState('');
   const [betDeadline, setBetDeadline] = useState('');
-  const [condition, setCOndition] = useState("");
+  const [condition, setCondition] = useState("");
+  const [betName, setName] = useState("");
   const [amount, setAmount] = useState(0);
   const { showLoginScreen, setShowLoginScreen, setShowSidebar } = useContextState()
+
+  const router = useRouter()
 
   const stakeAmount = Number(amount).toFixed(2)
 
@@ -27,41 +31,24 @@ const AddBetComponent = () => {
         setShowLoginScreen(true)
         return
       }
-      
 
-      const response = await axios.get("/api/user")
-      const users = response.data
-
-      if (user && users.lengthh === 0) {
-        const response = await axios.post("/api/add_user", {
-          email: user.email,
-          name: `${user.firstName} ${user.lastName}`,
-          walletAddress: user.verifiedCredentials[0].address,
-          username: user.username,
-        })
-
-        const response2 = axios.post("/api/add_bet", {
-          condition: condition,
-          userId: response.data.id,
-          currentBetCondition: "start",
-          betDeadline: betDeadline,
-          stakeAmount: amount,
-        })
-
-        console.log(response2)
-      } else {
-
-        const currentUser = users.find((userInfo: any) => userInfo.email === user?.email)
-        const response2 = axios.post("/api/add_bet", {
-          condition: condition,
-          userId: currentUser.id,
-          currentBetCondition: "start",
-          betDeadline: betDeadline,
-          stakeAmount: amount,
-        })
-
-        console.log(response2)
+      const data = {
+        condition: condition,
+        name: betName,
+        currentBetCondition: "start",
+        user1: user.username,
+        betDeadline: betDeadline,
+        stakeAmount: amount,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.email,
+        walletAddress: user.verifiedCredentials[0].address,
+        username: user.username
       }
+
+      const response = await axios.post("/api/create_bet", data)
+
+      router.push("/live_bet")
       // navigate to live bets
     } catch (error) {
       console.log(error)
@@ -86,12 +73,12 @@ const AddBetComponent = () => {
             <form className='text-[14px] pb-6'>
               <div className='py-1'>
                 <label className='text-[11px] font-semibold'>Bet Name</label>
-                <input type='text' required className='w-full bg-[#ececec] p-2 rounded-md' />
+                <input type='text' required className='w-full bg-[#ececec] p-2 rounded-md' onChange={(e) => setName(e.target.value)} />
               </div>
 
               <div className='py-1'>
                 <label className='text-[11px] font-semibold'>Condition</label>
-                <textarea cols={4} required className='w-full bg-[#ececec] p-2 rounded-md' />
+                <textarea cols={4} required className='w-full bg-[#ececec] p-2 rounded-md' onChange={(e) => setCondition(e.target.value)} />
               </div>
 
               <div className='py-1'>
@@ -141,12 +128,12 @@ const AddBetComponent = () => {
                   </div>
                   <div className='flex items-center pl-2'>
                     <div className='bg-[#ececec] p-[4px] text-[12px]'>USDC</div>
-                    <input className='bg-[#ececec] text-[12px] p-[4px] border-l-2 border-[#595959] outline-none w-[70px] text-center' type='number' value={stakeAmount} onChange={e => setAmount(Number(e.target.value))}/>
+                    <input className='bg-[#ececec] text-[12px] p-[4px] border-l-2 border-[#595959] outline-none w-[70px] text-center' type='number' value={stakeAmount} onChange={e => setAmount(Number(e.target.value))} />
                   </div>
                 </div>
               </div>
 
-              <button disabled={!isFormValid} className='w-full mt-10 bg-red-200 py-2 rounded-md'>Create bet</button>
+              <button disabled={!isFormValid} className='w-full mt-10 bg-red-200 py-2 rounded-md' onClick={handleAddBet}>Create bet</button>
             </form>
           </div>
         </div>}

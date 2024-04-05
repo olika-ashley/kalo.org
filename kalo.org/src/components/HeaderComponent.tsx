@@ -1,25 +1,30 @@
 'use client';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { PiPlayCircle } from "react-icons/pi";
 import { HiOutlinePlusSm } from "react-icons/hi";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+
 export const Navbar = () => {
   const pathname = usePathname();
+  
 
   const isActive = (href: string) => {
     return pathname === href || (href === '/' && pathname === '/createBets');
   };
+
+
+  
 
   return (
     <div className='w-full'>
       <div className='flex invisible md:visible items-center justify-between px-20 bg-white shadow-lg py-4'>
         {/* Logo */}
         <div className='flex-1 w-3/4 flex items-center justify-evenly'>
-          <h1 className="text-3xl text-black">Kalo</h1>
-          
+          <h1 className="text-3xl text-black">Kaló
+          </h1>
           {/* Create bet */}
           <Link href="/createBets">
             <div className={`flex items-center ${isActive('/createBets') ? 'pb-2 pt-3 border-b border-black' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
@@ -52,7 +57,6 @@ export const Navbar = () => {
         {/* Connection */}
         
           <a href="#" className="py-3 px-7 bg-[#7343CB] text-white rounded-xl" >Connect Wallet</a>
-        
       </div>
     </div>
   );

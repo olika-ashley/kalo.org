@@ -1,6 +1,7 @@
 import { db } from "@/utils/database";
 import { NextResponse } from "next/server";
 
+
 export async function POST(request: Request) {
     try {
 
@@ -33,10 +34,11 @@ export async function POST(request: Request) {
                     condition: data.condition,
                     name: data.name,
                     currentBetCondition: data.currentBetCondition,
-                    user1: data.user1,
+                    user1Name: createUser.username,
+                    userId: createUser.id,
+                    user1Answer: data.userAnswer,
                     betDeadline: data.betDeadline,
-                    stakeAmount: data.stakeAmount,
-                    userId: createUser.id
+                    stakeAmount: data.stakeAmount, 
                 }
             })
 
@@ -52,10 +54,11 @@ export async function POST(request: Request) {
                     condition: data.condition,
                     name: data.name,
                     currentBetCondition: data.currentBetCondition,
-                    user1: data.user1,
+                    user1Name: user.username,
+                    userId: user.id,
+                    user1Answer: data.userAnswer,
                     betDeadline: data.betDeadline,
-                    stakeAmount: data.stakeAmount,
-                    userId: user.id
+                    stakeAmount: data.stakeAmount, 
                 }
             })
 

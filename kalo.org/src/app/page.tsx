@@ -4,7 +4,8 @@ import LoginScreen from "@/components/LoginScreen";
 import { useContextState } from "@/context/AppContextProvider";
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from "react";
-
+import Kalo from "../assets/kalo_log-clear.png"
+import Image from "next/image";
 
 const RedirectingComponent = () => {
   return (
@@ -22,9 +23,7 @@ const WelcomePage = () => {
 
   return (
     <section className="flex flex-col items-center justify-center h-screen bg-white text-black">
-      <h1 className="text-6xl font-bold tracking-tight animate-bounce">Welcome to</h1>
-      <h2 className="text-5xl font-semibold mt-5 animate-pulse">Kaló</h2>
-      <p className="mt-4 text-lg text-gray-300 animate-slide-in-from-left">Your Social Betting onchain platform</p>
+      <Image src={Kalo} alt="logo" width={100} height={50} className="mt-5 animate-pulse" />
     </section>
   )
 

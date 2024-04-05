@@ -7,13 +7,15 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import LoginScreen from './LoginScreen';
 import { Slider } from './ui/slider';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AddBetComponent = () => {
   const [selectAnswer, setSelectAnswer] = useState('');
   const [betDeadline, setBetDeadline] = useState('');
   const [condition, setCondition] = useState("");
-  const [betName, setName] = useState("");
+  const [betName, setBetName] = useState("");
   const [amount, setAmount] = useState(0);
   const { showLoginScreen, setShowLoginScreen, setShowSidebar } = useContextState()
 
@@ -36,17 +38,27 @@ const AddBetComponent = () => {
         condition: condition,
         name: betName,
         currentBetCondition: "start",
-        user1: user.username,
+        user1Name: user.username,
         betDeadline: betDeadline,
         stakeAmount: amount,
         email: user.email,
         firstName: user.firstName,
         lastName: user.email,
         walletAddress: user.verifiedCredentials[0].address,
-        username: user.username
+        username: user.username,
+        userAnswer: selectAnswer === "true" ? true : false
       }
 
       const response = await axios.post("/api/create_bet", data)
+      toast.success('Bet created successfully!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
 
       router.push("/live_bet")
       // navigate to live bets
@@ -60,10 +72,11 @@ const AddBetComponent = () => {
     setAmount(newValueAsNumber)
   };
 
-  const isFormValid = !!condition && !!betDeadline && !!selectAnswer && amount !== 0;
+  const isFormValid = !!condition && !!betDeadline && !!selectAnswer && amount !== 0 && !!betName;
 
   return (
     <div className='h-[90%]'>
+      <ToastContainer />
       {showLoginScreen ?
         <LoginScreen />
         :
@@ -73,7 +86,7 @@ const AddBetComponent = () => {
             <form className='text-[14px] pb-6'>
               <div className='py-1'>
                 <label className='text-[11px] font-semibold'>Bet Name</label>
-                <input type='text' required className='w-full bg-[#ececec] p-2 rounded-md' onChange={(e) => setName(e.target.value)} />
+                <input type='text' required className='w-full bg-[#ececec] p-2 rounded-md' onChange={(e) => setBetName(e.target.value)} />
               </div>
 
               <div className='py-1'>

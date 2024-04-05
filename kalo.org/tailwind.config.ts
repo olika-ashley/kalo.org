@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
 
-const config: Config = {
+const config = {
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -59,18 +59,22 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        fall: {
-          '0%': { transform: 'translate(0%,-150%) skewX(0deg)' },
-          '50%': { transform: 'translate(0%,0%) skewX(-10deg)' },
-          '100%': { transform: 'translate(0%,150%) skewX(0deg)' },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
-        fall: 'fall 3s ease infinite',
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-};
+} satisfies Config
 
-export default config;
+export default config

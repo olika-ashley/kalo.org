@@ -5,6 +5,7 @@ import { PiPlayCircle } from "react-icons/pi";
 import { HiOutlinePlusSm } from "react-icons/hi";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 export const Navbar = () => {
   const pathname = usePathname();
@@ -51,8 +52,8 @@ export const Navbar = () => {
         
         {/* Connection */}
         
-          <a href="#" className="py-3 px-7 bg-[#7343CB] rounded-xl" >Connect Wallet</a>
-        
+        <Image className='rounded-full w-[30px] h-[30px]' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTymAr-_PS4slIBU_4NSwv1KnSo-gX-qKFUmQ&s" alt="" width={100} height={100}/>
+
       </div>
     </div>
   );

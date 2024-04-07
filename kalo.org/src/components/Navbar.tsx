@@ -30,15 +30,6 @@ export const Navbar = () => {
             </div>
           </Link>
 
-          {/* Bets */}
-          <Link href="/bets">
-            <div className={`flex items-center ${isActive('/bets') ? 'pb-2 pt-3 border-b border-[#B2B1B1]' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
-              {/* Your code for Bets */}
-              <PiPlayCircle className="text-black text-2xl mr-1" />
-              <p className="text-black">Bets</p>
-            </div>
-          </Link>
-
           {/* Live bets */}
           <Link href="/live-bets">
             <div className={`flex items-center ${isActive('/live-bets') ? 'pb-2 pt-3 border-b border-[#B2B1B1]' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
@@ -49,8 +40,6 @@ export const Navbar = () => {
           </Link>
       
         </div>
-        
-        {/* Connection */}
         
         <Image className='rounded-full w-[30px] h-[30px]' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTymAr-_PS4slIBU_4NSwv1KnSo-gX-qKFUmQ&s" alt="" width={100} height={100}/>
 

@@ -5,6 +5,9 @@ import { PiPlayCircle } from "react-icons/pi";
 import { HiOutlinePlusSm } from "react-icons/hi";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import { MdOutlinePerson2 } from "react-icons/md";
+import { BsSlashSquare } from "react-icons/bs";
 
 
 export const Navbar = () => {
@@ -33,18 +36,16 @@ export const Navbar = () => {
               <p className="text-black">Create bet</p>
             </div>
           </Link>
-
-          {/* Bets */}
-          <Link href="/bets">
-            <div className={`flex items-center ${isActive('/bets') ? 'pb-2 pt-3 border-b border-[#B2B1B1]' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
-              {/* Your code for Bets */}
-              <PiPlayCircle className="text-black text-2xl mr-1" />
-              <p className="text-black">Bets</p>
+          {/* my bets */}
+          <Link  href="/myBets">
+            <div className={`flex items-center ${isActive('/myBets') ? 'pb-2 pt-3 border-b border-[#B2B1B1]' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
+              {/* Your code for Live Bet */}
+              <BsSlashSquare className="text-black mr-1 text-2xl" />
+              <p className="text-black">My bets</p>
             </div>
           </Link>
-
           {/* Live bets */}
-          <Link href="/live_bet">
+          <Link  href="/live_bet">
             <div className={`flex items-center ${isActive('/live_bet') ? 'pb-2 pt-3 border-b border-[#B2B1B1]' : 'pb-2 pt-3 border-b border-transparent'} cursor-pointer`}>
               {/* Your code for Live Bet */}
               <PiPlayCircle className="text-black mr-1 text-2xl" />
@@ -56,7 +57,9 @@ export const Navbar = () => {
         
         {/* Connection */}
         
-          <a href="#" className="py-3 px-7 bg-[#7343CB] text-white rounded-xl" >Connect Wallet</a>
+        <MdOutlinePerson2 className='text-2xl'/>
+
+
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ export async function POST(request: Request) {
             throw new Error("An error occurred")
           }
 
-          console.log(bet)
+          console.log(" bet created successfully as: ", bet)
         return NextResponse.json(bet)
     } catch (error) {
       console.log(error)

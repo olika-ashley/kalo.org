@@ -4,7 +4,9 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
     try {
 
-        const bet = await db.bets.findMany()
+        const bet = await db.bets.findFirst({
+            where:{}
+        })
 
         if (!bet) {
             throw new Error("An error occur")

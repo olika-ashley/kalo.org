@@ -4,9 +4,11 @@ import { ImCheckmark2 } from 'react-icons/im';
 import { MdClose } from 'react-icons/md';
 import formatDate from "../utils/formatDate";
 import SkeletonLoader from '../components/ui/SkeletonLoader';
-
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 const SingleLiveBet = ({ bet, loading }: any) => {
     const [timeRemaining, setTimeRemaining] = useState('');
+    const router = useRouter()
 
     const handleWinner = async () => {
         try {
@@ -51,10 +53,7 @@ const SingleLiveBet = ({ bet, loading }: any) => {
 
     return (
         <div className='flex my-4 items-center p-4 rounded-md bg-[#ffffff]'>
-            {loading ? (
-                <SkeletonLoader />
-            ) : (
-                <>
+                <Link href={`/bet/${bet.id}`} className='flex gap-2 justify-between w-full items-center'>
                     <div className='flex flex-col items-center'>
                         <ImCheckmark2 className='text-red-300' />
                         <h2 className='bg-[#cd9666] rounded-sm text-sm px-3 my-1 py-[1px]'>{bet.user1Name}</h2>
@@ -73,8 +72,8 @@ const SingleLiveBet = ({ bet, loading }: any) => {
                         <h2 className='bg-purple-400 rounded-sm text-sm px-3 my-1 py-[1px]'> {bet.user2Name ?? "Emmanuel"} </h2>
                         <h2 className='text-xs'>${bet.stakeAmount}</h2>
                     </div>
-                </>
-            )}
+                </Link>
+            )
         </div>
     );
 };

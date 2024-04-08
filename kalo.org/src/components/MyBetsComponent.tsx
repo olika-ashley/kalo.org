@@ -31,7 +31,7 @@ const MyBetsComponent: React.FC<MyBetsComponentProps> = ({ data, socialMediaIcon
     };
 
     return (
-        <div className='py-4 mx-auto md:w-w-9/12 sm:w-8/12 w-11/12 border bg-white shadow-lg mb-3 rounded-lg'>
+        <div className='py-4 mx-auto md:w-w-9/12 sm:w-8/12 w-11/12 border bg-white shadow-lg mb-6 rounded-lg'>
             <div className="w-full my-4 flex flex-col items-center justify-center">
                 <IoIosCheckmarkCircleOutline className="text-[8rem] text-[#21806a]" />
                 <h3 className="text-xl font-extrabold">Bet Ticket</h3>

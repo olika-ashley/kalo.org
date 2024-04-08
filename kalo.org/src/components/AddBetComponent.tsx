@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoginScreen from './LoginScreen';
 import { Slider } from './ui/slider';
 import { useRouter } from 'next/navigation';
-import ShareLinkComponent from './ui/ShareLinkComponent';
 import { useContextState } from '@/context/AppContextProvider';
 import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
 

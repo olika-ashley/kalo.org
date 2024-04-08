@@ -7,49 +7,7 @@ import Image from 'next/image';
 
 
 const HomeComponent: React.FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://prod.events.api.betdex.com/events');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setEvents(data.eventCategories.flatMap((category) =>
-          category.eventGroup.flatMap((group) => group.events)
-        ));
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const groupEventsByCategory = (events: Event[], limit: number) => {
-    const groupedEvents: { [key: string]: Event[] } = {};
-    events.forEach((event) => {
-      if (!groupedEvents[event.categoryTitle]) {
-        groupedEvents[event.categoryTitle] = [];
-      }
-      if (groupedEvents[event.categoryTitle].length < limit) {
-        groupedEvents[event.categoryTitle].push(event);
-      }
-    });
-    return groupedEvents;
-  };
-
-  const groupedEvents = groupEventsByCategory(events, 10);
-
-  
-//find all bet that has 0 hours from database and update the winner. basically calling the update bet function
-  // useEffect(() => {
-
-  // }, [])
 
   return (
     <div className="bg-gray-800 p-4 rounded-md w-full">
@@ -67,25 +25,16 @@ const HomeComponent: React.FC = () => {
         </div>
 
       </div>
-      {loading ? (
-        <SkeletonLoader />
-      ) : (
         <>
         {/* show all user bet  and thhe time remaining for the bet*/}
-          {Object.entries(groupedEvents).map(([categoryTitle, events], index) => (
-            <div key={categoryTitle} className={`mb-8 ${index !== 0 ? 'mt-8' : ''}`}>
-              <h2 className="text-white text-lg mb-2">{categoryTitle}</h2>
+          
+            <div className='mb-8 '>
+              <h2 className="text-white text-lg mb-2"></h2>
               <div className="border border-gray-700 rounded-md p-4 overflow-y-hidden">
-                {events.map((event, index) => (
-                  <div key={index} className="mb-2 px-5 py-3">
-                    <p className="text-white">{event.eventName}</p>
-                  </div>
-                ))}
               </div>
             </div>
-          ))}
         </>
-      )}
+  
     </div>
   );
 };

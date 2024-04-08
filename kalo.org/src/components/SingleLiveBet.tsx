@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ImCheckmark2 } from 'react-icons/im';
-import { MdClose } from 'react-icons/md';
+import { MdAdd, MdClose } from 'react-icons/md';
 import formatDate from "../utils/formatDate";
-import SkeletonLoader from '../components/ui/SkeletonLoader';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useContextState } from '@/context/AppContextProvider';
 const SingleLiveBet = ({ bet, loading }: any) => {
     const [timeRemaining, setTimeRemaining] = useState('');
-    const router = useRouter()
+
+    const {setShowBetOpponentForm, setBetId} = useContextState()
 
     const handleWinner = async () => {
         try {
@@ -20,6 +20,11 @@ const SingleLiveBet = ({ bet, loading }: any) => {
         } finally {
 
         }
+    }
+
+    const handleShowOpponentForm = (id:string) => {
+        setBetId(id)
+        setShowBetOpponentForm(true)
     }
 
     useEffect(() => {
@@ -53,27 +58,37 @@ const SingleLiveBet = ({ bet, loading }: any) => {
 
     return (
         <div className='flex my-4 items-center p-4 rounded-md bg-[#ffffff]'>
-                <Link href={`/bet/${bet.id}`} className='flex gap-2 justify-between w-full items-center'>
-                    <div className='flex flex-col items-center'>
-                        <ImCheckmark2 className='text-red-300' />
-                        <h2 className='bg-[#cd9666] rounded-sm text-sm px-3 my-1 py-[1px]'>{bet.user1Name}</h2>
-                        <h2 className='text-xs'>${bet.stakeAmount}</h2>
+            <Link href={`/bet/${bet.id}`} className='flex gap-2 justify-between w-full items-center'>
+                <div className='flex flex-col items-center'>
+                    <ImCheckmark2 className='text-red-300' />
+                    <h2 className='bg-[#cd9666] rounded-sm text-sm px-3 my-1 py-[1px]'>{bet.user1Name}</h2>
+                    <h2 className='text-xs'>${bet.stakeAmount}</h2>
+                </div>
+                <div className='flex flex-1 flex-col items-center'>
+                    <h2 className='text-[14px] text-center'>{bet.name}</h2>
+                    <h2 className='md:text-[18px] pt-2 pb-1 text-[16px]'>VS</h2>
+                    <h2 className='text-[12px] pt-4 text-center'>{formatDate(bet.betDeadline)}</h2>
+                    <h2 className='text-[12px] pt-4 text-center'>{timeRemaining}</h2>
+                </div>
+                <>
+                    {bet?.user2Name === "" || bet?.user2Name  === undefined || bet?.user2Name === null?
+                        <div className='flex flex-col items-center'>
+                        <button className=' px-2 text-sm flex flex-col items-center' onClick={() => handleShowOpponentForm(bet.id)}><MdAdd  className='text-purple-400 text-2xl'/>
+                        <span className='bg-purple-400 px-2 rounded'>Stake Against</span>
+                        </button>
                     </div>
-                    <div className='flex flex-1 flex-col items-center'>
-                        <h2 className='text-[14px] text-center'>{bet.name}</h2>
-                        <h2 className='md:text-[18px] pt-2 pb-1 text-[16px]'>VS</h2>
-                        <h2 className='text-[12px] pt-4 text-center'>{formatDate(bet.betDeadline)}</h2>
-                        <h2 className='text-[12px] pt-4 text-center'>{timeRemaining}</h2>
-                    </div>
-                    <div className='flex flex-col items-center'>
-                        <div className='p-[2px] bg-purple-400'>
-                            <MdClose  />
+                        :
+                        <div className='flex flex-col items-center'>
+                            <div className='p-[2px] bg-purple-400'>
+                                <MdClose />
+                            </div>
+                            <h2 className='bg-purple-400 rounded-sm text-sm px-3 my-1 py-[1px]'> {bet.user2Name} </h2>
+                            <h2 className='text-xs'>${bet?.stake2Amount}</h2>
                         </div>
-                        <h2 className='bg-purple-400 rounded-sm text-sm px-3 my-1 py-[1px]'> {bet.user2Name ?? "Emmanuel"} </h2>
-                        <h2 className='text-xs'>${bet.stakeAmount}</h2>
-                    </div>
-                </Link>
-            )
+                    }
+                </>
+            </Link>
+
         </div>
     );
 };

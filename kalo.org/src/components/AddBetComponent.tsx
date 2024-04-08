@@ -7,6 +7,7 @@ import { Slider } from './ui/slider';
 import { useRouter } from 'next/navigation';
 import ShareLinkComponent from './ui/ShareLinkComponent';
 import { useContextState } from '@/context/AppContextProvider';
+import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
 
 const AddBetComponent = () => {
   const [selectAnswer, setSelectAnswer] = useState('');
@@ -16,6 +17,9 @@ const AddBetComponent = () => {
   const [amount, setAmount] = useState(0);
   const { showLoginScreen, setShowLoginScreen, setShowSidebar } = useContextState();
   const router = useRouter();
+
+  const { user} = useDynamicContext()
+
   const stakeAmount = Number(amount).toFixed(2);
 
   const handleAddBet = async () => {

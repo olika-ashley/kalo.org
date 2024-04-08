@@ -19,6 +19,7 @@ model Bets {
   answer              Boolean?
   betDeadline         String
   stakeAmount         Float
+  stake2Amount         Float?
   user1Answer         Boolean?
   user2Answer         Boolean?
   user2Id             String?

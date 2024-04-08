@@ -2,12 +2,14 @@
 import AddBetComponent from '@/components/AddBetComponent';
 import MobileHeader from '@/components/MobileHeader';
 import { useContextState } from '@/context/AppContextProvider';
+import formatDate from '@/utils/formatDate';
 import axios from 'axios';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ImCheckmark2 } from 'react-icons/im';
 import { MdClose } from 'react-icons/md';
 import { Oval } from 'react-loader-spinner'
+import { IoChevronBackOutline } from "react-icons/io5";
 
 export default function BetInfo() {
   const [data, setData] = useState<any>()
@@ -15,6 +17,7 @@ export default function BetInfo() {
   const {showBetOpponentForm} = useContextState()
 
   const pathName = usePathname()
+  const router = useRouter()
   const betId = pathName.split('/').pop() || "";
 
   const getBetById = async () => {
@@ -24,7 +27,7 @@ export default function BetInfo() {
         params: {
           betId: betId
         }
-
+        
       })
       setData(response.data)
     } catch (error) {
@@ -33,11 +36,11 @@ export default function BetInfo() {
       setLoading(false)
     }
   }
-
+  
   useEffect(() => {
     getBetById()
   }, [])
-
+  
   return (
     <>
       {loading ?
@@ -62,6 +65,10 @@ export default function BetInfo() {
           {data &&
           <div className='py-10 h-[90%] overflow-scroll'>
           <div className="w-full flex flex-col items-center justify-center py-12 px-3">
+
+            <div className='flex items-center justify-start py-3 md:w-8/12 sm:w-8/12 w-11/12'>
+              <IoChevronBackOutline onClick={()=> router.push("/createBets")} className="text-3xl cursor-pointer" />
+            </div>
             <h2 className='flex py-3 pt-5 text-xl md:w-8/12 sm:w-8/12 w-11/12'> Bets Details</h2>
             <div className='py-4 mx-auto md:w-8/12 sm:w-8/12 w-11/12 flex my-4 items-center p-4 rounded-md bg-[#ffffff]'>
               <div className='flex gap-2 justify-between w-full items-center'>
@@ -93,9 +100,9 @@ export default function BetInfo() {
 
                 </div>
                 <div className="flex-1 flex gap-2 items-center justify-between">
-                  <div className='bg-[#cd9666] rounded-sm text-sm px-3 my-1 flex items-center justify-center py-3'> Ladies for the trophy</div>
-                  <div>Ladies for the trophy</div>
-                  <div> Draw </div>
+                  <div className='bg-[#cd9666] rounded-sm text-sm px-3 my-1 flex items-center justify-center py-3 text-center'> {data?.condition}</div>
+                  <div className='text-center'>{data?.condition}</div>
+                  <div> {formatDate(data?.betDeadline)} </div>
                 </div>
               </div>
               <div className="flex gap-2 justify-between  w-full my-4 items-center py-4 rounded-md">
@@ -103,9 +110,9 @@ export default function BetInfo() {
                   <h3 className='font-bold text-2xl'>Against: </h3>
                 </div>
                 <div className="flex-1 flex gap-2 items-center justify-between">
-                  <div className=''> Ladies for the trophy</div>
-                  <div className='p-[2px] flex items-center justify-center bg-purple-400 rounded-sm text-sm px-3 my-1 py-3'>Guys for the trophy</div>
-                  <div> Draw </div>
+                  <div className='text-center'> {data?.condition}</div>
+                  <div className='p-[2px] flex items-center justify-center bg-purple-400 rounded-sm text-sm px-3 my-1 py-3 text-center'>{data?.condition}</div>
+                  <div> {formatDate(data?.betDeadline)} </div>
                 </div>
               </div>
             </div>
